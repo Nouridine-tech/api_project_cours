@@ -17,7 +17,7 @@ class AssuranceResource extends JsonResource
         return [
             'id' => $this->id,
             'libelle' => $this->libelle,
-            'montant' => number_format($this->montant, 0, ',', ''). ' FCFA',
+            'montant' => (int) $this->montant,
             'bonus' => (float) $this->bonus,
         ];
     }

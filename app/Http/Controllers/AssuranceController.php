@@ -22,7 +22,7 @@ class AssuranceController extends Controller
     )]
     public function index()
     {
-        $assurance = Assurance::all();
+        $assurance = Assurance::get();
         return AssuranceResource::collection($assurance);
     }
 
@@ -40,7 +40,7 @@ class AssuranceController extends Controller
                 properties: [
                     new OA\Property(property: "libelle", type: "string", example: "Assurance Auto"),
                     new OA\Property(property: "montant", type: "number", example: 50000),
-                    new OA\Property(property: "bonus", type: "number", example: 10.5)
+                    new OA\Property(property: "bonus", type: "number", example: 10.5),
                 ]
             )
         ),
@@ -50,6 +50,10 @@ class AssuranceController extends Controller
     )]
     public function store(Request $request)
     {
+        $request->validate([
+            'type_assurance_id' => 'required|exists:type_assurances,id',
+        ]);
+
         $assurance = new Assurance();
         $assurance->libelle = request('libelle');
         $assurance->montant = request('montant');
@@ -106,7 +110,7 @@ class AssuranceController extends Controller
                 properties: [
                     new OA\Property(property: "libelle", type: "string", example: "Assurance Auto Modifiée"),
                     new OA\Property(property: "montant", type: "number", example: 60000),
-                    new OA\Property(property: "bonus", type: "number", example: 12.5)
+                    new OA\Property(property: "bonus", type: "number", example: 12.5),
                 ]
             )
         ),
@@ -116,6 +120,10 @@ class AssuranceController extends Controller
     )]
     public function update(Request $request, Assurance $assurance)
     {
+        $request->validate([
+            'type_assurance_id' => 'required|exists:type_assurances,id',
+        ]);
+
         $assurance->libelle = $request['libelle'];
         $assurance->montant = $request['montant'];
         $assurance->bonus = $request['bonus'];
