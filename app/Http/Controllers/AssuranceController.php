@@ -50,9 +50,6 @@ class AssuranceController extends Controller
     )]
     public function store(Request $request)
     {
-        $request->validate([
-            'type_assurance_id' => 'required|exists:type_assurances,id',
-        ]);
 
         $assurance = new Assurance();
         $assurance->libelle = request('libelle');
@@ -120,10 +117,6 @@ class AssuranceController extends Controller
     )]
     public function update(Request $request, Assurance $assurance)
     {
-        $request->validate([
-            'type_assurance_id' => 'required|exists:type_assurances,id',
-        ]);
-
         $assurance->libelle = $request['libelle'];
         $assurance->montant = $request['montant'];
         $assurance->bonus = $request['bonus'];

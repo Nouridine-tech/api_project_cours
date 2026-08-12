@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('type_assurances', function (Blueprint $table) {
             $table->id();
             $table->string("libelle")->unique();
-            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

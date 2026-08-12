@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Assurance;
 use App\Models\TypeAssurance;
 use Illuminate\Http\Request;
 
@@ -24,8 +23,6 @@ class TypeAssuranceController extends Controller
     {
         $type = new TypeAssurance();
         $type->libelle = $request['libelle'];
-        //Ajout de status (true par defaut)
-        $type->status = $request->input('status', true);
         $type->save();
         return response()->json($type);
     }
@@ -44,9 +41,6 @@ class TypeAssuranceController extends Controller
     public function update(Request $request, TypeAssurance $typeAssurance)
     {
     $typeAssurance->libelle = $request['libelle'];
-    if ($request->has('status')) {
-        $typeAssurance->status = $request['status'];
-    }
     $typeAssurance->save();
     return response()->json($typeAssurance);
     }
